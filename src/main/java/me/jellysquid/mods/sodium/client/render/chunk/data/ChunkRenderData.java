@@ -19,8 +19,8 @@ public class ChunkRenderData {
             .build();
     public static final ChunkRenderData EMPTY = createEmptyData();
 
-    private List<BlockEntity> globalBlockEntities;
-    private List<BlockEntity> blockEntities;
+    private final Set<BlockEntity> globalBlockEntities = new HashSet<>();
+    private final Set<BlockEntity> blockEntities = new HashSet<>();
 
     private ChunkOcclusionData occlusionData;
     private ChunkRenderBounds bounds;
@@ -101,8 +101,8 @@ public class ChunkRenderData {
 
         public ChunkRenderData build() {
             ChunkRenderData data = new ChunkRenderData();
-            data.globalBlockEntities = this.globalBlockEntities;
-            data.blockEntities = this.blockEntities;
+            data.globalBlockEntities.addAll(this.globalBlockEntities);
+            data.blockEntities.addAll(this.blockEntities);
             data.occlusionData = this.occlusionData;
             data.bounds = this.bounds;
             data.animatedSprites = new ObjectArrayList<>(this.animatedSprites);
